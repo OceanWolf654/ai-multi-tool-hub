@@ -12,7 +12,7 @@ app = Flask(__name__, static_url_path='', static_folder='.', template_folder='.'
 # OpenAI API Key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
-
+#App routes
 @app.route('/')
 def home():
     return render_template('index.html')
