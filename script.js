@@ -1,4 +1,5 @@
-const BASE_URL = "https://ai-multi-tool-hub.onrender.com";  // Replace with your actual URL
+const BASE_URL = "";
+
 
 // Calculator Function
 function calculate() {
