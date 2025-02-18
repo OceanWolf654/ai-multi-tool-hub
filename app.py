@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+app = Flask(__name__, static_url_path='', static_folder='.', template_folder='.')
 
 # Set OpenAI API Key
 openai.api_key = os.getenv("OPENAI_API_KEY")
