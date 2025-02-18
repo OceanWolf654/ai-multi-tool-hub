@@ -35,6 +35,7 @@ function handleKeyPress(event) {
     }
 }
 
+
 // Weather Forecast Function
 async function getWeather() {
     let city = prompt("Enter city name:");
@@ -46,12 +47,51 @@ async function getWeather() {
     alert(`Weather in ${city}: ${data.weather}, Temperature: ${data.temperature}°C`);
 }
 
-// Timer Function (Opens in new tab)
+// TIMER FUNCTION (Countdown)
+let timerInterval;
 function startTimer() {
-    window.open("/timer", "_blank");
+    let minutes = prompt("Enter minutes:");
+    if (!minutes || isNaN(minutes)) return;
+
+    let seconds = minutes * 60;
+    let display = document.getElementById("timer-display");
+
+    clearInterval(timerInterval); // Clear any existing timers
+    timerInterval = setInterval(() => {
+        let min = Math.floor(seconds / 60);
+        let sec = seconds % 60;
+        display.innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        seconds--;
+
+        if (seconds < 0) {
+            clearInterval(timerInterval);
+            alert("Time's up!");
+        }
+    }, 1000);
 }
 
-// Stopwatch Function (Opens in new tab)
-function openStopwatch() {
-    window.open("/stopwatch", "_blank");
+// STOPWATCH FUNCTION
+let stopwatchInterval;
+let stopwatchSeconds = 0;
+function startStopwatch() {
+    if (stopwatchInterval) return;
+    let display = document.getElementById("stopwatch-display");
+
+    stopwatchInterval = setInterval(() => {
+        stopwatchSeconds++;
+        let min = Math.floor(stopwatchSeconds / 60);
+        let sec = stopwatchSeconds % 60;
+        display.innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }, 1000);
+}
+
+function stopStopwatch() {
+    clearInterval(stopwatchInterval);
+    stopwatchInterval = null;
+}
+
+function resetStopwatch() {
+    stopStopwatch();
+    stopwatchSeconds = 0;
+    document.getElementById("stopwatch-display").innerText = "0:00";
 }
