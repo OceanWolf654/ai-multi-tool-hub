@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify
 import openai
 from dotenv import load_dotenv
 
@@ -8,7 +8,7 @@ load_dotenv()
 
 app = Flask(__name__, static_url_path='', static_folder='.', template_folder='.')
 
-# Set OpenAI API Key
+# OpenAI API Key (Make sure it's set in Render)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/')
@@ -34,10 +34,5 @@ def chat():
 
     return jsonify({"response": response["choices"][0]["message"]["content"]})
 
-# Serve static files manually if needed
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    return send_from_directory('static', filename)
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000, debug=True)
