@@ -1,4 +1,4 @@
-const BASE_URL = "";
+const BASE_URL = "https://ai-multi-tool-hub.onrender.com";
 
 
 // Calculator Function
