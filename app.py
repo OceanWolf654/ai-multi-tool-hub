@@ -4,8 +4,7 @@ import openai
 app = Flask(__name__)
 
 # Set your OpenAI API key
-openai.api_key = "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"
-
+openai.api_key = "OPENAI_API_KEY"
 @app.route('/')
 def home():
     return render_template('index.html')
