@@ -1,4 +1,4 @@
-const BASE_URL = "https://ai-multi-tool-hub.onrender.com";
+const BASE_URL = "https://ai-multi-tool-hub.onrender.com/";
 
 
 // Calculator Function
@@ -33,4 +33,25 @@ function handleKeyPress(event) {
     if (event.key === "Enter") {
         askChatbot();
     }
+}
+
+// Weather Forecast Function
+async function getWeather() {
+    let city = prompt("Enter city name:");
+    if (!city) return;
+
+    let response = await fetch(`${BASE_URL}/weather?city=${city}`);
+    let data = await response.json();
+
+    alert(`Weather in ${city}: ${data.weather}, Temperature: ${data.temperature}°C`);
+}
+
+// Timer Function (Opens in new tab)
+function startTimer() {
+    window.open("/timer", "_blank");
+}
+
+// Stopwatch Function (Opens in new tab)
+function openStopwatch() {
+    window.open("/stopwatch", "_blank");
 }

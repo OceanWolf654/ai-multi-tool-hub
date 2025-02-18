@@ -13,8 +13,12 @@
         <div class="buttons">
             <a href="/calculator" class="btn">🧮 Calculator</a>
             <a href="/chatbot" class="btn">🤖 AI Chatbot</a>
-            <a href="https://hitesh-reddy1805.github.io/quiz_application" class="btn" target="_blank">📐 TrigMaster (Trigonometry Practice)</a> <!-- New Redirect Button -->
+            <a href="https://hitesh-reddy1805.github.io/quiz_application" class="btn" target="_blank">📐 TrigMaster (Trigonometry Practice)*</a>
+            <button class="btn" onclick="getWeather()">🌦️ Weather Forecast</button>
+            <a href="/timer" class="btn" target="_blank">⏳ Open Timer</a>
+            <a href="/stopwatch" class="btn" target="_blank">⏱️ Open Stopwatch</a>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
