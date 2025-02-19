@@ -16,7 +16,7 @@ WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 @app.route('/')
 def home():
     return render_template('index.html')
-
+ 
 @app.route('/calculator')
 def calculator():
     return render_template('calculator.html')

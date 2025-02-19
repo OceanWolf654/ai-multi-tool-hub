@@ -1,7 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url("backround.jpeg")no-repeat center center fixed;
+    background: url("backround.jpeg") no-repeat center center fixed;
+    background-size: cover;
     color: white;
     margin: 0;
     padding: 0;
