@@ -1,6 +1,5 @@
 import os
 from flask import Flask, render_template, request, jsonify
-import openai
 import requests
 from dotenv import load_dotenv
 
@@ -9,14 +8,17 @@ load_dotenv()
 
 app = Flask(__name__, static_url_path='', static_folder='.', template_folder='.')
 
-# OpenAI API Key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Hugging Face API Endpoint
+HF_API_URL = "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium"
+HF_API_KEY = os.getenv("HUGGINGFACE_API_KEY")
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
-#App routes
+
+headers = {"Authorization": f"Bearer {HF_API_KEY}"}
+
 @app.route('/')
 def home():
     return render_template('index.html')
- 
+
 @app.route('/calculator')
 def calculator():
     return render_template('calculator.html')
@@ -28,11 +30,16 @@ def chatbot():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_input = request.json['message']
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": user_input}]
-    )
-    return jsonify({"response": response["choices"][0]["message"]["content"]})
+    
+    # Send request to Hugging Face model
+    response = requests.post(HF_API_URL, headers=headers, json={"inputs": user_input})
+    
+    if response.status_code == 200:
+        bot_reply = response.json().get("generated_text", "I didn't understand that.")
+    else:
+        bot_reply = "Sorry, I'm having trouble responding right now."
+
+    return jsonify({"response": bot_reply})
 
 @app.route('/weather')
 def weather():
